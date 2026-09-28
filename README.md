@@ -8,7 +8,8 @@ Built by a facilitator, for facilitators. Each tool does one job, works in a bro
 
 | Tool | What it does |
 |---|---|
-| [Smart SMART Meeting Generator](meeting-verification-generator/) | Create meeting attendance verification PDFs for one or more participants while keeping their information private and local on your computer. Built on Smart Recovery USA Volunteer HQ verification form [https://volunteerhq.smartrecovery.org/wp-content/uploads/2021/03/Zoom-Meeting-Attendance-Verification-Form.pdf](https://volunteerhq.smartrecovery.org/wp-content/uploads/2021/03/Zoom-Meeting-Attendance-Verification-Form.pdf) |
+| [Smart SMART Meeting Generator](meeting-verification-generator/) | Create meeting attendance verification PDFs for one or more participants while keeping their information private and local on your computer. 
+Built on Smart Recovery USA Volunteer HQ verification form [https://volunteerhq.smartrecovery.org/wp-content/uploads/2021/03/Zoom-Meeting-Attendance-Verification-Form.pdf](https://volunteerhq.smartrecovery.org/wp-content/uploads/2021/03/Zoom-Meeting-Attendance-Verification-Form.pdf) |
 
 ## Use one
 
