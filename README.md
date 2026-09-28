@@ -8,7 +8,7 @@ Built by a facilitator, for facilitators. Each tool does one job, works in a bro
 
 | Tool | What it does |
 |---|---|
-| _coming soon_ | |
+| [Smart SMART Meeting Generator](meeting-verification-generator/) | Create meeting attendance verification PDFs for one or more participants. |
 
 ## Use one
 
