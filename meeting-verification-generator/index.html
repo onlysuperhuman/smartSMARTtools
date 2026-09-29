@@ -99,8 +99,8 @@
         </div>
         <div>
           <label for="meetingLabel">Meeting name or location</label>
-          <input id="meetingLabel" type="text" autocomplete="organization" placeholder="Community Zoom">
-          <div class="help">For example: “Community Zoom,” “Monday Evening,” or a physical location.</div>
+          <input id="meetingLabel" type="text" autocomplete="organization" value="SMART Meeting 8984">
+          <div class="help">For example: “SMART Meeting 8984 on Zoom,” “Kalamazoo,” or other descriptor.</div>
         </div>
         <div>
           <label for="contact">Contact email <span class="help">(optional)</span></label>
@@ -417,6 +417,7 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
   const Core = window.SmartMeetingCore;
   const STORAGE_KEY = 'smart-smart-meeting-generator-settings-v1';
   const DEFAULT_PREFIX = 'Meeting Attendance Verification';
+  const DEFAULT_MEETING_LABEL = 'SMART Meeting 8984';
   let customBlocks = [];
   let activeUrls = [];
   let lastLoadedWording = '';
@@ -543,7 +544,8 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
   function resetSettings() {
     localStorage.removeItem(STORAGE_KEY);
     byId('remember').checked = false;
-    for (const id of ['facilitatorName','facilitatorNumber','meetingLabel','contact']) byId(id).value = '';
+    for (const id of ['facilitatorName','facilitatorNumber','contact']) byId(id).value = '';
+    byId('meetingLabel').value = DEFAULT_MEETING_LABEL;
     byId('verificationMode').value = 'own';
     customBlocks = [];
     renderCustomBlocks();
