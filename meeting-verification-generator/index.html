@@ -479,9 +479,15 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
     };
     const dearName = String(person.dearName || '').trim().replace(/^Dear\s+/i, '').replace(/,+\s*$/, '');
     if (dearName || settings.replaceSalutation) {
+      const greeting = dearName ? `Dear ${dearName},` : 'To Whom It May Concern:';
+      if (dearName) {
+        const size = fitSize(context, greeting, 255, 11, 7);
+        setCanvasFont(context, size);
+        if (context.measureText(greeting).width > 255) throw new Error(`The dear_name for ${person.fullName} is too long for the form. Shorten it in the CSV.`);
+      }
       page.drawRectangle({ x:64, y:588, width:265, height:28, color:rgb(1,1,1) });
       context.fillStyle = '#000';
-      draw(dearName ? `Dear ${dearName},` : 'To Whom It May Concern:', 66, 600, 255, 11, 7);
+      draw(greeting, 66, 600, 255, 11, 7);
     }
     draw(person.fullName, 175, 571, 187, 11, 7);
     draw(settings.meetingLabel, 137, 547, 171, 11, 7);
@@ -558,10 +564,11 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
   }
   function renderCustomBlocks() {
     const container = byId('customBlocks');
+    const selected = new Set(selectedValues('.custom-block'));
     container.textContent = '';
     for (const block of customBlocks) {
       const row = document.createElement('div'); row.className = 'custom-row';
-      const input = document.createElement('input'); input.type = 'checkbox'; input.value = block.id; input.className = 'custom-block';
+      const input = document.createElement('input'); input.type = 'checkbox'; input.value = block.id; input.className = 'custom-block'; input.checked = selected.has(block.id);
       const text = document.createElement('span'); text.textContent = block.text;
       const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'secondary small'; remove.textContent = 'Remove';
       remove.addEventListener('click', () => { customBlocks = customBlocks.filter(candidate => candidate.id !== block.id); renderCustomBlocks(); saveSettingsIfEnabled(); });
