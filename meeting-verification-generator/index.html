@@ -12,9 +12,12 @@
     .card { background:white; border:1px solid var(--line); border-radius:16px; padding:30px; box-shadow:0 12px 30px rgba(23,32,51,.07); }
     .brand { display:flex; align-items:baseline; gap:13px; flex-wrap:wrap; margin-bottom:7px; }
     h1 { margin:0; font-size:29px; line-height:1.15; }
-    .byline { color:var(--muted); font-size:13px; white-space:nowrap; }
+    .byline { color:var(--muted); font-size:13px; white-space:nowrap; margin-left:auto; text-align:right; }
     .subtitle { margin:0 0 22px; color:var(--muted); line-height:1.5; }
-    .privacy { border-left:4px solid var(--good); background:#f0fdf4; padding:12px 14px; margin:0 0 26px; border-radius:8px; line-height:1.45; }
+    .privacy { border-left:4px solid var(--good); background:#f0fdf4; padding:12px 14px; margin:0 0 14px; border-radius:8px; line-height:1.45; }
+    .source-note { display:flex; align-items:center; gap:12px 16px; flex-wrap:wrap; margin:0 0 26px; }
+    .source-note p { color:var(--muted); font-size:13px; line-height:1.4; margin:0; flex:1 1 300px; }
+    .source-note p a { color:var(--blue); }
     .section { border-top:1px solid var(--line); padding-top:24px; margin-top:24px; }
     .section:first-of-type { border-top:0; padding-top:0; }
     h2 { font-size:19px; margin:0 0 4px; }
@@ -22,6 +25,7 @@
     label { display:block; font-weight:650; margin:16px 0 7px; }
     input[type="text"], input[type="email"], textarea, input[type="file"], select { width:100%; border:1px solid #b9c2d0; border-radius:9px; padding:11px 12px; font:inherit; color:var(--ink); background:white; }
     input:focus, textarea:focus, select:focus { outline:3px solid rgba(18,103,178,.17); border-color:var(--blue); }
+    #verificationMode { appearance:none; -webkit-appearance:none; padding-right:42px; background-color:white; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m3.5 6 4.5 4 4.5-4' fill='none' stroke='%231267b2' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 15px center; background-size:16px; cursor:pointer; }
     textarea { min-height:150px; resize:vertical; line-height:1.45; }
     #verificationText { min-height:190px; }
     .grid { display:grid; grid-template-columns:1fr 1fr; gap:0 16px; }
@@ -30,14 +34,15 @@
     .help { color:var(--muted); font-size:13px; margin-top:6px; line-height:1.4; }
     .or { display:flex; align-items:center; gap:12px; color:var(--muted); margin:18px 0 4px; }
     .or::before,.or::after { content:""; height:1px; background:var(--line); flex:1; }
-    button, .download-link { border:0; border-radius:10px; padding:12px 17px; background:var(--blue); color:white; font:700 15px/1.15 inherit; cursor:pointer; text-decoration:none; display:inline-flex; justify-content:center; align-items:center; }
-    button:hover, .download-link:hover { background:var(--blue-dark); }
+    button, .download-link, .form-link { border:0; border-radius:10px; padding:12px 17px; background:var(--blue); color:white; font:700 15px/1.15 inherit; cursor:pointer; text-decoration:none; display:inline-flex; justify-content:center; align-items:center; }
+    button:hover, .download-link:hover, .form-link:hover { background:var(--blue-dark); }
     button:disabled { opacity:.55; cursor:wait; }
     .secondary { color:var(--blue); background:#eaf4fd; border:1px solid #bbd9f1; }
     .secondary:hover { background:#dceefa; }
     .small { padding:9px 12px; font-size:13px; }
     .full { width:100%; margin-top:24px; padding:14px 18px; font-size:16px; }
     .row-actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:12px; }
+    .salutation-option { margin-top:24px; }
     .remember-row { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
     .remember-row .check { margin:14px 0 0; }
     .builder { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:15px; margin-top:14px; }
@@ -74,7 +79,11 @@
       <span class="byline">by Only (super)Human</span>
     </div>
     <p class="subtitle">Create ready-to-share SMART Recovery meeting attendance verification PDFs for one or more participants.</p>
-    <div class="privacy"><strong>Private by design:</strong> this page works entirely on your computer. Participant names, meeting dates, and finished PDFs are not sent anywhere.</div>
+    <div class="privacy"><strong>Private by design:</strong> this page works entirely on your computer. The tool does not upload names, dates, settings, or PDFs. If you choose to remember settings, only your facilitator details, preferred wording, and custom wording blocks are stored in this browser. Participant names and dates are not stored.</div>
+    <div class="source-note">
+      <a id="viewBlankForm" class="form-link secondary small" href="#" target="_blank" rel="noopener noreferrer" aria-label="View blank form in a new tab">View blank form</a>
+      <p>Based on the Zoom Meeting Attendance Verification Form from SMART Recovery Volunteer HQ. <a href="https://volunteerhq.smartrecovery.org/wp-content/uploads/2021/03/Zoom-Meeting-Attendance-Verification-Form.pdf" target="_blank" rel="noopener noreferrer">View the original form</a> (online).</p>
+    </div>
 
     <section class="section" aria-labelledby="facilitator-heading">
       <h2 id="facilitator-heading">1. Your facilitator details</h2>
@@ -82,7 +91,7 @@
       <div class="grid">
         <div>
           <label for="facilitatorName">Your name</label>
-          <input id="facilitatorName" type="text" autocomplete="name" placeholder="Alex Weber">
+          <input id="facilitatorName" type="text" autocomplete="name" placeholder="Your name">
         </div>
         <div>
           <label for="facilitatorNumber">SMART Recovery facilitator number</label>
@@ -109,14 +118,40 @@
       <div class="help">Participant names and meeting dates are never saved by this tool.</div>
     </section>
 
+    <section class="section" aria-labelledby="meeting-heading">
+      <h2 id="meeting-heading">2. Add meeting and participants</h2>
+      <div class="grid">
+        <div>
+          <label for="batchDate">Meeting date</label>
+          <input id="batchDate" type="text" placeholder="September 4, 2026" autocomplete="off">
+          <div class="help">Used for every pasted name and printed in both date locations.</div>
+        </div>
+        <div>
+          <label for="prefix">Filename prefix</label>
+          <input id="prefix" type="text" value="Meeting Attendance Verification" autocomplete="off">
+          <div class="help">PDF filenames use first name + last initial by default.</div>
+        </div>
+      </div>
+
+      <label for="names">Participant names</label>
+      <textarea id="names" placeholder="Mike Smith&#10;Bob Davis&#10;Jordan Example | Jordan E"></textarea>
+      <div class="help">One person per line. Optional format: <code>Full Name | Filename Name</code>. By default, PDF filenames include the prefix, first name, last initial, and meeting date. The participant's full name appears on the PDF.</div>
+
+      <div class="or">or choose a CSV</div>
+      <label for="csv" style="margin-top:10px">CSV file</label>
+      <input id="csv" type="file" accept=".csv,text/csv">
+      <div class="help">Headers: <code>full_name</code>; optional <code>file_name</code>, <code>date</code>, and <code>dear_name</code>. A <code>dear_name</code> value fills “Dear [name],” for that participant; otherwise the greeting option below applies. If the CSV contains multiple dates, the tool creates one ZIP for each date.</div>
+
+    </section>
+
     <section class="section" aria-labelledby="wording-heading">
-      <h2 id="wording-heading">2. Choose the verification wording</h2>
+      <h2 id="wording-heading">3. Choose the verification wording</h2>
       <p class="section-intro">Start with a suggested option, then edit the final text before creating the PDFs.</p>
       <label for="verificationMode">Starting point</label>
       <select id="verificationMode">
+        <option value="own">Write my own</option>
         <option value="confidentiality">Confidentiality-forward</option>
         <option value="blocks">Build from blocks</option>
-        <option value="own">Write my own</option>
       </select>
 
       <div id="blockBuilder" class="builder" hidden>
@@ -135,38 +170,13 @@
       </div>
       <label for="verificationText">Text that will appear on the form</label>
       <textarea id="verificationText" placeholder="Enter the participation or verification wording you want to use."></textarea>
-      <div class="help">This editor is the final say: make any changes here before generating. Text wraps onto separate form lines for readability.</div>
+      <div class="help">Make any changes here before generating. Text wraps onto separate form lines for readability.</div>
     </section>
 
-    <section class="section" aria-labelledby="meeting-heading">
-      <h2 id="meeting-heading">3. Add the meeting and participants</h2>
-      <div class="grid">
-        <div>
-          <label for="batchDate">Meeting date</label>
-          <input id="batchDate" type="text" placeholder="September 4, 2026" autocomplete="off">
-          <div class="help">Used for every pasted name and printed in both date locations.</div>
-        </div>
-        <div>
-          <label for="prefix">Filename prefix</label>
-          <input id="prefix" type="text" value="Meeting Attendance Verification" autocomplete="off">
-          <div class="help">PDF filenames use first name + last initial by default.</div>
-        </div>
-      </div>
-
-      <label for="names">Participant names</label>
-      <textarea id="names" placeholder="Mike Smith&#10;Bob Davis&#10;Jordan Example | Jordan E"></textarea>
-      <div class="help">One person per line. Optional format: <code>Full Name | Filename Name</code>.</div>
-
-      <div class="or">or choose a CSV</div>
-      <label for="csv" style="margin-top:10px">CSV file</label>
-      <input id="csv" type="file" accept=".csv,text/csv">
-      <div class="help">Headers: <code>full_name</code>, optional <code>file_name</code>, optional <code>date</code>. If the CSV contains multiple dates, the tool creates one ZIP for each date.</div>
-
-      <label class="check">
-        <input id="salutation" type="checkbox">
-        <span>Replace the blank “Dear ______” line with “To Whom It May Concern:”</span>
-      </label>
-    </section>
+    <label class="check salutation-option">
+      <input id="salutation" type="checkbox" checked>
+      <span>Replace the blank “Dear ______” line with “To Whom It May Concern:”</span>
+    </label>
 
     <button id="generate" class="full" type="button">Create verification PDFs</button>
     <div id="status" role="status" aria-live="polite"></div>
@@ -248,7 +258,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     if (mode === 'own') return '';
     if (mode === 'confidentiality') {
       const contact = normalizeContact(options.contact);
-      return CONFIDENTIALITY_TEXT + (contact ? `\nI can be reached at ${contact}.` : '');
+      return CONFIDENTIALITY_TEXT + (contact ? `\n\nI can be reached at ${contact}.` : '');
     }
     if (mode !== 'blocks') throw new Error(`Unknown verification text mode: ${mode}`);
 
@@ -296,13 +306,15 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     const nameAt = headers.indexOf('full_name');
     const fileAt = headers.indexOf('file_name');
     const dateAt = headers.indexOf('date');
+    const dearAt = headers.indexOf('dear_name');
     if (nameAt < 0) throw new Error('The CSV needs a full_name column.');
     return rows
       .filter(candidate => candidate.some(Boolean))
       .map(candidate => ({
         fullName: candidate[nameAt] || '',
         fileName: fileAt >= 0 ? candidate[fileAt] || '' : '',
-        date: dateAt >= 0 ? candidate[dateAt] || '' : ''
+        date: dateAt >= 0 ? candidate[dateAt] || '' : '',
+        dearName: dearAt >= 0 ? candidate[dearAt] || '' : ''
       }));
   }
 
@@ -313,7 +325,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       .filter(Boolean)
       .map(line => {
         const [fullName = '', fileName = ''] = line.split('|').map(value => value.trim());
-        return { fullName, fileName, date: '' };
+        return { fullName, fileName, date: '', dearName: '' };
       });
   }
 
@@ -352,7 +364,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       facilitatorNumber: String(state.facilitatorNumber || ''),
       meetingLabel: String(state.meetingLabel || ''),
       contact: String(state.contact || ''),
-      verificationMode: String(state.verificationMode || 'confidentiality'),
+      verificationMode: String(state.verificationMode || 'own'),
       verificationText: String(state.verificationText || ''),
       customBlocks: (state.customBlocks || []).map(block => ({ id: String(block.id), text: String(block.text || '') }))
     };
@@ -363,7 +375,8 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       people: (state.people || []).map(person => ({
         fullName: String(person.fullName || ''),
         fileName: String(person.fileName || ''),
-        date: String(person.date || '')
+        date: String(person.date || ''),
+        dearName: String(person.dearName || '')
       })),
       batchDate: String(state.batchDate || ''),
       facilitatorName: String(state.facilitatorName || ''),
@@ -400,7 +413,7 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
 <script>
 (() => {
   'use strict';
-  const { PDFDocument } = PDFLib;
+  const { PDFDocument, rgb } = PDFLib;
   const Core = window.SmartMeetingCore;
   const STORAGE_KEY = 'smart-smart-meeting-generator-settings-v1';
   const DEFAULT_PREFIX = 'Meeting Attendance Verification';
@@ -440,7 +453,9 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
       const lines = [];
       for (const paragraph of String(text || '').split(/\r?\n/)) {
         if (paragraph.trim()) lines.push(...wrapLine(context, paragraph, size, width));
+        else if (lines.length) lines.push('');
       }
+      while (lines[lines.length - 1] === '') lines.pop();
       if (lines.length <= maxLines) return { lines, size };
     }
     throw new Error('The verification wording is too long for the form. Shorten it to fit on eight lines.');
@@ -462,11 +477,11 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
       setCanvasFont(context, size);
       context.fillText(String(text || ''), x, 792 - pdfY);
     };
-    if (settings.replaceSalutation) {
-      context.fillStyle = '#fff';
-      context.fillRect(64, 792 - 616, 225, 28);
+    const dearName = String(person.dearName || '').trim().replace(/^Dear\s+/i, '').replace(/,+\s*$/, '');
+    if (dearName || settings.replaceSalutation) {
+      page.drawRectangle({ x:64, y:588, width:265, height:28, color:rgb(1,1,1) });
       context.fillStyle = '#000';
-      draw('To Whom It May Concern:', 66, 600, 220, 11, 9);
+      draw(dearName ? `Dear ${dearName},` : 'To Whom It May Concern:', 66, 600, 255, 11, 7);
     }
     draw(person.fullName, 175, 571, 187, 11, 7);
     draw(settings.meetingLabel, 137, 547, 171, 11, 7);
@@ -511,7 +526,7 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
       byId('facilitatorNumber').value = settings.facilitatorNumber || '';
       byId('meetingLabel').value = settings.meetingLabel || '';
       byId('contact').value = settings.contact || '';
-      byId('verificationMode').value = settings.verificationMode || 'confidentiality';
+      byId('verificationMode').value = settings.verificationMode || 'own';
       byId('verificationText').value = settings.verificationText || '';
       customBlocks = Array.isArray(settings.customBlocks) ? settings.customBlocks : [];
       byId('remember').checked = true;
@@ -523,7 +538,7 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
     localStorage.removeItem(STORAGE_KEY);
     byId('remember').checked = false;
     for (const id of ['facilitatorName','facilitatorNumber','meetingLabel','contact']) byId(id).value = '';
-    byId('verificationMode').value = 'confidentiality';
+    byId('verificationMode').value = 'own';
     customBlocks = [];
     renderCustomBlocks();
     updateModeDisplay();
@@ -648,6 +663,7 @@ window.TEMPLATE_PDF_BASE64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKH
     finally { button.disabled = false; }
   }
 
+  byId('viewBlankForm').href = URL.createObjectURL(new Blob([base64Bytes(window.TEMPLATE_PDF_BASE64)], { type:'application/pdf' }));
   renderBuiltInBlocks();
   restoreSettings();
   renderCustomBlocks();
